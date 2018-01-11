@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		3CB182F92005690E007E9EF6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CB182F82005690E007E9EF6 /* main.cpp */; };
+		3CB183012005696A007E9EF6 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB183002005696A007E9EF6 /* OpenGL.framework */; };
+		3CB183042005697E007E9EF6 /* window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CB183022005697E007E9EF6 /* window.cpp */; };
+		3CB1830820056C5D007E9EF6 /* shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CB1830620056C5D007E9EF6 /* shader.cpp */; };
+		3CB1830B20056CEC007E9EF6 /* buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CB1830920056CEC007E9EF6 /* buffer.cpp */; };
+		3CB1830E20057C38007E9EF6 /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CB1830C20057C38007E9EF6 /* camera.cpp */; };
+		3CB1831220058576007E9EF6 /* texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CB1831020058576007E9EF6 /* texture.cpp */; };
+		3CB1831E2005C582007E9EF6 /* cube.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CB1831C2005C582007E9EF6 /* cube.cpp */; };
+		3CB1832820068168007E9EF6 /* chunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CB1832620068168007E9EF6 /* chunk.cpp */; };
+		3CFB484920069CC100F60A4D /* text.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CFB484720069CC100F60A4D /* text.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +34,27 @@
 /* Begin PBXFileReference section */
 		3CB182F52005690E007E9EF6 /* OpenGLPractice */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OpenGLPractice; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CB182F82005690E007E9EF6 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		3CB183002005696A007E9EF6 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		3CB183022005697E007E9EF6 /* window.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = window.cpp; sourceTree = "<group>"; };
+		3CB183032005697E007E9EF6 /* window.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = window.hpp; sourceTree = "<group>"; };
+		3CB1830620056C5D007E9EF6 /* shader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = shader.cpp; sourceTree = "<group>"; };
+		3CB1830720056C5D007E9EF6 /* shader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = shader.hpp; sourceTree = "<group>"; };
+		3CB1830920056CEC007E9EF6 /* buffer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = buffer.cpp; sourceTree = "<group>"; };
+		3CB1830A20056CEC007E9EF6 /* buffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = buffer.hpp; sourceTree = "<group>"; };
+		3CB1830C20057C38007E9EF6 /* camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
+		3CB1830D20057C38007E9EF6 /* camera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = camera.hpp; sourceTree = "<group>"; };
+		3CB1830F20058562007E9EF6 /* stb_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
+		3CB1831020058576007E9EF6 /* texture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = texture.cpp; sourceTree = "<group>"; };
+		3CB1831120058576007E9EF6 /* texture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = texture.hpp; sourceTree = "<group>"; };
+		3CB183142005B6F4007E9EF6 /* pyramid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pyramid.h; sourceTree = "<group>"; };
+		3CB183152005B8AB007E9EF6 /* cube.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cube.h; sourceTree = "<group>"; };
+		3CB183172005C4EC007E9EF6 /* transform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = transform.h; sourceTree = "<group>"; };
+		3CB1831C2005C582007E9EF6 /* cube.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = cube.cpp; sourceTree = "<group>"; };
+		3CB1831D2005C582007E9EF6 /* cube.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = cube.hpp; sourceTree = "<group>"; };
+		3CB1832620068168007E9EF6 /* chunk.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = chunk.cpp; sourceTree = "<group>"; };
+		3CB1832720068168007E9EF6 /* chunk.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = chunk.hpp; sourceTree = "<group>"; };
+		3CFB484720069CC100F60A4D /* text.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = text.cpp; sourceTree = "<group>"; };
+		3CFB484820069CC100F60A4D /* text.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = text.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CB183012005696A007E9EF6 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +74,7 @@
 			children = (
 				3CB182F72005690E007E9EF6 /* OpenGLPractice */,
 				3CB182F62005690E007E9EF6 /* Products */,
+				3CB182FF2005696A007E9EF6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,9 +89,69 @@
 		3CB182F72005690E007E9EF6 /* OpenGLPractice */ = {
 			isa = PBXGroup;
 			children = (
+				3CB1831B2005C578007E9EF6 /* assets */,
+				3CB183162005C4D8007E9EF6 /* gen */,
+				3CB183132005B6E8007E9EF6 /* shapes */,
+				3CB1830520056C50007E9EF6 /* render */,
 				3CB182F82005690E007E9EF6 /* main.cpp */,
+				3CB183022005697E007E9EF6 /* window.cpp */,
+				3CB183032005697E007E9EF6 /* window.hpp */,
 			);
 			path = OpenGLPractice;
+			sourceTree = "<group>";
+		};
+		3CB182FF2005696A007E9EF6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3CB183002005696A007E9EF6 /* OpenGL.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3CB1830520056C50007E9EF6 /* render */ = {
+			isa = PBXGroup;
+			children = (
+				3CB1830620056C5D007E9EF6 /* shader.cpp */,
+				3CB1830720056C5D007E9EF6 /* shader.hpp */,
+				3CB1830920056CEC007E9EF6 /* buffer.cpp */,
+				3CB1830A20056CEC007E9EF6 /* buffer.hpp */,
+				3CB1830C20057C38007E9EF6 /* camera.cpp */,
+				3CB1830D20057C38007E9EF6 /* camera.hpp */,
+				3CB1830F20058562007E9EF6 /* stb_image.h */,
+				3CB1831020058576007E9EF6 /* texture.cpp */,
+				3CB1831120058576007E9EF6 /* texture.hpp */,
+				3CB183172005C4EC007E9EF6 /* transform.h */,
+			);
+			path = render;
+			sourceTree = "<group>";
+		};
+		3CB183132005B6E8007E9EF6 /* shapes */ = {
+			isa = PBXGroup;
+			children = (
+				3CB183142005B6F4007E9EF6 /* pyramid.h */,
+				3CB183152005B8AB007E9EF6 /* cube.h */,
+			);
+			path = shapes;
+			sourceTree = "<group>";
+		};
+		3CB183162005C4D8007E9EF6 /* gen */ = {
+			isa = PBXGroup;
+			children = (
+				3CB1832620068168007E9EF6 /* chunk.cpp */,
+				3CB1832720068168007E9EF6 /* chunk.hpp */,
+				3CFB484720069CC100F60A4D /* text.cpp */,
+				3CFB484820069CC100F60A4D /* text.hpp */,
+			);
+			path = gen;
+			sourceTree = "<group>";
+		};
+		3CB1831B2005C578007E9EF6 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				3CB1831C2005C582007E9EF6 /* cube.cpp */,
+				3CB1831D2005C582007E9EF6 /* cube.hpp */,
+			);
+			path = assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,7 +211,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CB1831E2005C582007E9EF6 /* cube.cpp in Sources */,
+				3CB1830820056C5D007E9EF6 /* shader.cpp in Sources */,
+				3CFB484920069CC100F60A4D /* text.cpp in Sources */,
+				3CB1830B20056CEC007E9EF6 /* buffer.cpp in Sources */,
+				3CB1832820068168007E9EF6 /* chunk.cpp in Sources */,
 				3CB182F92005690E007E9EF6 /* main.cpp in Sources */,
+				3CB1831220058576007E9EF6 /* texture.cpp in Sources */,
+				3CB183042005697E007E9EF6 /* window.cpp in Sources */,
+				3CB1830E20057C38007E9EF6 /* camera.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,6 +333,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glm/0.9.8.5/include/,
+					/usr/local/include/,
+				);
+				LIBRARY_SEARCH_PATHS = /usr/local/lib/;
+				OTHER_LDFLAGS = (
+					"-lGLFW",
+					"-lfreetype",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -241,6 +350,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/glm/0.9.8.5/include/,
+					/usr/local/include/,
+				);
+				LIBRARY_SEARCH_PATHS = /usr/local/lib/;
+				OTHER_LDFLAGS = (
+					"-lGLFW",
+					"-lfreetype",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
