@@ -21,29 +21,46 @@
 #include "render/transform.h"
 #include "gen/chunk.hpp"
 #include "gen/text.hpp"
+#include "interaction/collision.h"
+#include "gen/skybox.hpp"
 
 int main() {
     Window window;
-    Camera cam(glm::vec3(0,0,5), window.getWindow());
+    Camera cam(glm::vec3(30,0,40), window.getWindow());
+    Collision collision;
+    Skybox skybox;
     
-    Chunk100x1x100 chunk(0, -4, 10);
-    Chunk100x1x100 chunk2(-100, -4, 10);
+    Chunk100x1x100 chunk(0, -4, 10, collision);
+    Chunk16x16x16 c3(0,-1,20,collision);
+//    Chunk16x16x16 c4(20,2,0);
+//    Chunk16x16x16 c5(-20,2,0);
+//    Chunk16x16x16 c6(0,2,-20);
     Text text;
     
-    clock_t current_ticks, delta_ticks;
-    clock_t fps = 0;
+    double previousTime = glfwGetTime();
+    int frameCount = 0;
+    int lastFrameCount = 0;
+    
+//    glfwSwapInterval(0);//disables v-sync
     
     glm::vec4 clip;
     while(window.isOpen()){
-        current_ticks = clock();
-        window.clear(0.7f, 0.7f, 0.7f, 1.0f);
-        cam.update();
+        double currentTime = glfwGetTime();
+        frameCount++;
+        if ( currentTime - previousTime >= 1.0 ){
+            lastFrameCount = frameCount;
+            frameCount = 0;
+            previousTime += 1.0;
+        }
+        window.clear(0.2f, 0.2f, 0.2f, 1.0f);
+        cam.update(collision);
         chunk.update(cam);
-        chunk2.update(cam);
-        delta_ticks = clock() - current_ticks;
-        if(delta_ticks > 0)
-            fps = CLOCKS_PER_SEC / delta_ticks;
-        text.draw("fps " + std::to_string(fps));
+        c3.update(cam);
+//        c4.update(cam);
+//        c5.update(cam);
+//        c6.update(cam);
+        skybox.render(cam);
+        text.draw("fps " + std::to_string(lastFrameCount));
         window.update();
     }
 }

@@ -23,7 +23,7 @@ void Chunk100x1x100::update(Camera& cam){
     buffer->drawWithoutIndices(transforms.size());
 }
 
-void Chunk1000x1x1000::update(Camera& cam){
+void Chunk100x100x100::update(Camera& cam){
     shader->bind();
     shader->update(cam);
     texture->bind(0);

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C6E3B4E2007F0DA00880582 /* batch_render.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C6E3B4C2007F0DA00880582 /* batch_render.cpp */; };
+		3C6E3B5220080D4200880582 /* skybox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C6E3B5020080D4200880582 /* skybox.cpp */; };
 		3CB182F92005690E007E9EF6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CB182F82005690E007E9EF6 /* main.cpp */; };
 		3CB183012005696A007E9EF6 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CB183002005696A007E9EF6 /* OpenGL.framework */; };
 		3CB183042005697E007E9EF6 /* window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CB183022005697E007E9EF6 /* window.cpp */; };
@@ -32,6 +34,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3C6E3B3E2007199700880582 /* cube_inds.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cube_inds.h; sourceTree = "<group>"; };
+		3C6E3B4A2007450F00880582 /* collision.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = collision.h; sourceTree = "<group>"; };
+		3C6E3B4C2007F0DA00880582 /* batch_render.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = batch_render.cpp; sourceTree = "<group>"; };
+		3C6E3B4D2007F0DA00880582 /* batch_render.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = batch_render.hpp; sourceTree = "<group>"; };
+		3C6E3B5020080D4200880582 /* skybox.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = skybox.cpp; sourceTree = "<group>"; };
+		3C6E3B5120080D4200880582 /* skybox.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = skybox.hpp; sourceTree = "<group>"; };
 		3CB182F52005690E007E9EF6 /* OpenGLPractice */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OpenGLPractice; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CB182F82005690E007E9EF6 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		3CB183002005696A007E9EF6 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -69,6 +77,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C6E3B482007448F00880582 /* interaction */ = {
+			isa = PBXGroup;
+			children = (
+				3C6E3B4A2007450F00880582 /* collision.h */,
+			);
+			path = interaction;
+			sourceTree = "<group>";
+		};
+		3C6E3B4B2007F0C700880582 /* batching */ = {
+			isa = PBXGroup;
+			children = (
+				3C6E3B4C2007F0DA00880582 /* batch_render.cpp */,
+				3C6E3B4D2007F0DA00880582 /* batch_render.hpp */,
+			);
+			path = batching;
+			sourceTree = "<group>";
+		};
 		3CB182EC2005690E007E9EF6 = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +114,8 @@
 		3CB182F72005690E007E9EF6 /* OpenGLPractice */ = {
 			isa = PBXGroup;
 			children = (
+				3C6E3B4B2007F0C700880582 /* batching */,
+				3C6E3B482007448F00880582 /* interaction */,
 				3CB1831B2005C578007E9EF6 /* assets */,
 				3CB183162005C4D8007E9EF6 /* gen */,
 				3CB183132005B6E8007E9EF6 /* shapes */,
@@ -130,6 +157,7 @@
 			children = (
 				3CB183142005B6F4007E9EF6 /* pyramid.h */,
 				3CB183152005B8AB007E9EF6 /* cube.h */,
+				3C6E3B3E2007199700880582 /* cube_inds.h */,
 			);
 			path = shapes;
 			sourceTree = "<group>";
@@ -141,6 +169,8 @@
 				3CB1832720068168007E9EF6 /* chunk.hpp */,
 				3CFB484720069CC100F60A4D /* text.cpp */,
 				3CFB484820069CC100F60A4D /* text.hpp */,
+				3C6E3B5020080D4200880582 /* skybox.cpp */,
+				3C6E3B5120080D4200880582 /* skybox.hpp */,
 			);
 			path = gen;
 			sourceTree = "<group>";
@@ -215,10 +245,12 @@
 				3CB1830820056C5D007E9EF6 /* shader.cpp in Sources */,
 				3CFB484920069CC100F60A4D /* text.cpp in Sources */,
 				3CB1830B20056CEC007E9EF6 /* buffer.cpp in Sources */,
+				3C6E3B5220080D4200880582 /* skybox.cpp in Sources */,
 				3CB1832820068168007E9EF6 /* chunk.cpp in Sources */,
 				3CB182F92005690E007E9EF6 /* main.cpp in Sources */,
 				3CB1831220058576007E9EF6 /* texture.cpp in Sources */,
 				3CB183042005697E007E9EF6 /* window.cpp in Sources */,
+				3C6E3B4E2007F0DA00880582 /* batch_render.cpp in Sources */,
 				3CB1830E20057C38007E9EF6 /* camera.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

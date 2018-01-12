@@ -39,6 +39,8 @@ Shader::Shader(const std::string& file){
     glDeleteShader(fShader);
     transformMatrix = glGetUniformLocation(program, "MVP");
     offset = glGetUniformLocation(program, "offset");
+    view = glGetUniformLocation(program, "view");
+    projection = glGetUniformLocation(program, "projection");
 }
 
 void Shader::bind(){
@@ -48,6 +50,13 @@ void Shader::bind(){
 void Shader::update(Camera& cam){
     glm::mat4 mvp = cam.getMVP();
     glUniformMatrix4fv(transformMatrix, 1, GL_FALSE, &mvp[0][0]);
+}
+
+void Shader::updateSkybox(Camera& cam){
+    glm::mat4 camView = glm::mat4(glm::mat3(cam.getView()));
+    glm::mat4 camProj = cam.getProjection();
+    glUniformMatrix4fv(view, 1, GL_FALSE, &camView[0][0]);
+    glUniformMatrix4fv(projection, 1, GL_FALSE, &camProj[0][0]);
 }
 
 void Shader::textOffset(float xOff, float yOff){

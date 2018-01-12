@@ -20,12 +20,15 @@ public:
     Shader(const std::string& file);
     void bind();
     void update(Camera& cam);
+    void updateSkybox(Camera& cam);
     void textOffset(float xOff, float yOff);
     inline GLuint getProgram(){return program;}
 private:
     GLuint program;
     GLuint transformMatrix;
     GLuint offset;
+    GLuint view;
+    GLuint projection;
 };
 
 #endif /* shader_hpp */

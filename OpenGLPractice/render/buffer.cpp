@@ -102,30 +102,66 @@ Buffer::Buffer(float* verticies, unsigned int vertCount, float* texCoords, unsig
     glBindVertexArray(0);
 }
 
-Buffer::Buffer(float* verticies, unsigned int vertCount, unsigned int* indices, unsigned int indCount){
+Buffer::Buffer(float* verticies, unsigned int vertCount, unsigned int* indices, unsigned int indCount, float* texCoords, unsigned int tCoordCount, std::vector<Transform> transforms, unsigned int transformCount){
     this->indCount = indCount;
+    for(unsigned int i = 0 ; i < transformCount ; i++){
+        models.push_back(transforms[i].getModel());
+    }
+    
     glGenVertexArrays(1, &vao);
     glGenBuffers(1, &vbo);
-    glGenBuffers(1, &ebo);
+    glGenBuffers(1, &ibo);
+    glGenBuffers(1, &tbo);
     
     glBindVertexArray(vao);
     
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glBufferData(GL_ARRAY_BUFFER, vertCount * sizeof(float), verticies, GL_STATIC_DRAW);
     
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, indCount * sizeof(int), indices, GL_STATIC_DRAW);
     
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
     
+    glBindBuffer(GL_ARRAY_BUFFER, tbo);
+    glBufferData(GL_ARRAY_BUFFER, tCoordCount * sizeof(float), texCoords, GL_STATIC_DRAW);
+    
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(1);
+    
+    glBindBuffer(GL_ARRAY_BUFFER, transBO);
+    glBufferData(GL_ARRAY_BUFFER, transformCount * sizeof(models[0]), &models[0], GL_STATIC_DRAW);
+    
+    glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)0);
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(sizeof(float) * 4));
+    glEnableVertexAttribArray(3);
+    glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(sizeof(float) * 8));
+    glEnableVertexAttribArray(4);
+    glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(sizeof(float) * 12));
+    glEnableVertexAttribArray(5);
+    glVertexAttribDivisor(2, 1);
+    glVertexAttribDivisor(3, 1);
+    glVertexAttribDivisor(4, 1);
+    glVertexAttribDivisor(5, 1);
+    
     glBindVertexArray(0);
 }
 
-void Buffer::draw(){
+Buffer::Buffer(){
+    glGenVertexArrays(1, &vao);
+    glGenBuffers(1, &vbo);
+    glGenBuffers(1, &tbo);
+    glGenBuffers(1, &ibo);
+    
+    
+}
+
+void Buffer::draw(unsigned int instances){
     glBindVertexArray(vao);
-    glDrawElements(GL_TRIANGLES, indCount, GL_UNSIGNED_INT, 0);
-    glBindVertexArray(0);
+    glDrawElementsInstanced(GL_TRIANGLES, indCount, GL_UNSIGNED_INT, 0, instances);
+//    glDrawElements(GL_TRIANGLES, indCount, GL_UNSIGNED_INT, 0);
 }
 
 void Buffer::drawWithoutIndices(unsigned int instances){
@@ -133,3 +169,17 @@ void Buffer::drawWithoutIndices(unsigned int instances){
     glDrawArraysInstanced(GL_TRIANGLES, 0, vertCount, instances);
 //    glDrawArrays(GL_TRIANGLES, 0, vertCount);
 }
+
+void Buffer::drawBatchCube(unsigned int instances){
+    
+}
+
+
+
+
+
+
+
+
+
+
