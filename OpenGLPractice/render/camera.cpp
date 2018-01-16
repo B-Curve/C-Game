@@ -22,7 +22,7 @@ void Camera::init(){
 void Camera::update(Collision& collision){
     double current_time = glfwGetTime();
     float lagBoost = (current_time - last_time) * TIME_OFFSET;
-    if(glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS){
+    if(glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS && glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS){
         if(sprinting && fov < 55.0f){
             fov += 0.5f;
         }else sprinting = true;
@@ -31,10 +31,14 @@ void Camera::update(Collision& collision){
         fov = 45.0f;
     }
     sprintModifier = sprinting ? (current_time - last_time) * TIME_OFFSET : 1.0f;
-    jumpHeight = (current_time - last_time) * TIME_OFFSET / 4;
+    jumpHeight = (current_time - last_time) * TIME_OFFSET;
     if(jumping == true && jumps < 20){
-        position.y += jumpHeight;
-        jumps++;
+        if(glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS){
+            position.y += jumpHeight;
+        }else{
+            position.y += jumpHeight;
+            jumps++;
+        }
     }else{
         jumping = false;
         jumps = 0;

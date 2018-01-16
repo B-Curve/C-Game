@@ -8,39 +8,30 @@
 
 #include "batch_render.hpp"
 
-BatchRender::BatchRender(){
-    init();
+BatchRender::BatchRender(unsigned int NUM_DRAWS){
+    init(NUM_DRAWS);
 }
 
 BatchRender::~BatchRender(){
-    delete verticies;
-    delete indices;
+    
 }
 
-void BatchRender::init(){
-    verticies = new std::vector<Vertex>;
-    indices = new std::vector<Triangle>;
+void BatchRender::init(unsigned int NUM_DRAWS){
     
-    glGenVertexArrays(1, &m_vao);
-    glGenBuffers(1, &m_vbo);
-    glGenBuffers(1, &m_ibo);
-    glGenBuffers(1, &m_tbo);
+    glGenBuffers(1, &indirect_buffer);
+    glBindBuffer(GL_DRAW_INDIRECT_BUFFER, indirect_buffer);
+    glBufferData(GL_DRAW_INDIRECT_BUFFER, NUM_DRAWS * sizeof(DrawArraysIndirectCommand), NULL, GL_STATIC_DRAW);
+    command =
+    (DrawArraysIndirectCommand *)
+    glMapBufferRange(GL_DRAW_INDIRECT_BUFFER,
+                     0,
+                     NUM_DRAWS * sizeof(DrawArraysIndirectCommand),
+                     GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_BUFFER_BIT);
+    for(int i = 0 ; i < NUM_DRAWS ; i++){
+        
+    }
     
-    glBindBuffer(1, m_vbo);
     
-    glBindVertexArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    
-    glBindBuffer(1, m_ibo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, MAX_BUFFER_SIZE * sizeof(int), NULL, GL_DYNAMIC_DRAW);
-    
-    glBindBuffer(1, m_tbo);
-//    glBufferSubData(GL_ARRAY_BUFFER, 3 * sizeof(float), sizeof(<#expression-or-type#>), <#const GLvoid *data#>)
-    
-    glBindVertexArray(1);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)(3*sizeof(float)));
-    
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 void BatchRender::draw(){

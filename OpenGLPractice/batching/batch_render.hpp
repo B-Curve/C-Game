@@ -15,34 +15,23 @@
 #include <vector>
 #include <OpenGL/gl3.h>
 
-struct Vertex {
-    float x, y, z; //position
-    float u, v; //texCoords
-};
-
-struct Triangle {
-    int a, b, c; //index points
-};
-
-struct DrawElements {
-    GLuint vertexCount;
-    GLuint indexCount;
+typedef struct {
+    GLuint count;
     GLuint instanceCount;
-};
+    GLuint firstIndex;
+    GLuint baseVertex;
+    GLuint baseInstance;
+} DrawArraysIndirectCommand;
 
 class BatchRender {
 public:
-    BatchRender();
+    BatchRender(unsigned int NUM_DRAWS);
     virtual ~BatchRender();
     void draw();
 private:
-    void init();
-    GLuint m_vao;
-    GLuint m_vbo;
-    GLuint m_tbo;
-    GLuint m_ibo;
-    std::vector<Vertex> * verticies;
-    std::vector<Triangle> * indices;
+    void init(unsigned int NUM_DRAWS);
+    GLuint indirect_buffer;
+    DrawArraysIndirectCommand * command;
 };
 
 #endif /* batch_render_hpp */

@@ -38,9 +38,10 @@ Shader::Shader(const std::string& file){
     glDeleteShader(vShader);
     glDeleteShader(fShader);
     transformMatrix = glGetUniformLocation(program, "MVP");
-    offset = glGetUniformLocation(program, "offset");
+    modelMatrix = glGetUniformLocation(program, "model");
     view = glGetUniformLocation(program, "view");
     projection = glGetUniformLocation(program, "projection");
+    offset = glGetUniformLocation(program, "offset");
 }
 
 void Shader::bind(){
@@ -48,6 +49,11 @@ void Shader::bind(){
 }
 
 void Shader::update(Camera& cam){
+    glm::mat4 mvp = cam.getMVP();
+    glUniformMatrix4fv(transformMatrix, 1, GL_FALSE, &mvp[0][0]);
+}
+
+void Shader::update(Camera &cam, std::vector<glm::mat4> models, unsigned int size){
     glm::mat4 mvp = cam.getMVP();
     glUniformMatrix4fv(transformMatrix, 1, GL_FALSE, &mvp[0][0]);
 }

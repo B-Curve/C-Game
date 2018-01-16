@@ -9,8 +9,11 @@
 #ifndef chunk_hpp
 #define chunk_hpp
 
+#define CHUNK_SIZE 16
+
 #include <stdio.h>
 #include <vector>
+#include <cstdlib>
 #include "../render/transform.h"
 #include "../render/shader.hpp"
 #include "../render/texture.hpp"
@@ -19,16 +22,24 @@
 #include "../shapes/cube_inds.h"
 #include "../interaction/collision.h"
 
-class Chunk16x16x16 {
+class Chunk {
 public:
-    Chunk16x16x16(int xPos, int yPos, int zPos, Collision& collision){
+    Chunk(int xPos, int yPos, int zPos, Collision& collision){
+        this->xPos = xPos; this->yPos = yPos; this->zPos = zPos;
         position = glm::vec4(xPos+0.01f, yPos+0.01f, zPos+0.01f, 1.0f);
         shader = new Shader("./shaders/shader");
-        texture = new Texture("./textures/rock.jpg");
-        for(int x = xPos ; x < xPos + 16 ; x++){
-            for(int y = yPos ; y < yPos + 16 ; y++){
-                for(int z = zPos ; z < zPos + 16 ; z++){
+        texture = new Texture("./textures/grass.jpg");
+        int lastY = 0;
+        for(int x = xPos ; x < xPos + CHUNK_SIZE ; x++){
+            for(int z = zPos ; z < zPos + CHUNK_SIZE ; z++){
+                int randY = rand() % 3 + lastY;
+                lastY = randY;
+                if(lastY > 3) lastY = 3;
+                for(int y = yPos + randY ; y > yPos - CHUNK_SIZE ; y--){
+                    
+                    //TODO - Sort transforms based on player position so that culling can be evaluated much easier
                     transforms.push_back(Transform(glm::vec3(x,y,z)));
+//                    positions.push_back(glm::vec3(x,y,z));
                     collision.collisionPoints.push_back(glm::vec3(x,y,z));
                 }
             }
@@ -37,85 +48,9 @@ public:
     }
     void update(Camera& cam);
 private:
+    int xPos, yPos, zPos;
     std::vector<Transform> transforms;
-    std::vector<glm::mat4> activeModels;
-    glm::vec4 position;
-    //will be placed elsewhere eventually
-    Shader * shader;
-    Texture * texture;
-    Buffer * buffer;
-};
-
-class Chunk30x30x30_no_ind {
-public:
-    Chunk30x30x30_no_ind(int xPos, int yPos, int zPos, Collision& collision){
-        position = glm::vec4(xPos+0.01f, yPos+0.01f, zPos+0.01f, 1.0f);
-        shader = new Shader("./shaders/shader");
-        texture = new Texture("./textures/rock.jpg");
-        for(int x = xPos ; x < xPos + 30 ; x++){
-            for(int y = yPos ; y < yPos + 30 ; y++){
-                for(int z = zPos ; z < zPos + 30 ; z++){
-                    transforms.push_back(Transform(glm::vec3(x,y,z)));
-                }
-            }
-        }
-        buffer = new Buffer(cube::vertices, cube::vertTotal, cube::uv, cube::uvTotal, transforms, transforms.size());
-    }
-    void update(Camera& cam);
-private:
-    std::vector<Transform> transforms;
-    std::vector<glm::mat4> activeModels;
-    glm::vec4 position;
-    //will be placed elsewhere eventually
-    Shader * shader;
-    Texture * texture;
-    Buffer * buffer;
-};
-
-class Chunk100x1x100 {
-public:
-    Chunk100x1x100(int xPos, int yPos, int zPos, Collision& collision){
-        position = glm::vec4(xPos+0.01f, yPos+0.01f, zPos+0.01f, 1.0f);
-        shader = new Shader("./shaders/shader");
-        texture = new Texture("./textures/grass.jpg");
-        for(int x = xPos ; x < xPos + 100 ; x++){
-            for(int z = zPos ; z < zPos + 100 ; z++){
-                transforms.push_back(Transform(glm::vec3(x,yPos,z)));
-                collision.collisionPoints.push_back(glm::vec3(x,yPos,z));
-            }
-        }
-        buffer = new Buffer(cube::vertices, cube::vertTotal, cube::uv, cube::uvTotal, transforms, transforms.size());
-    }
-    void update(Camera& cam);
-private:
-    std::vector<Transform> transforms;
-    std::vector<glm::mat4> activeModels;
-    glm::vec4 position;
-    //will be placed elsewhere eventually
-    Shader * shader;
-    Texture * texture;
-    Buffer * buffer;
-};
-
-//DO NOT USE. NO OPTIMIZATION YET
-class Chunk100x100x100 {
-public:
-    Chunk100x100x100(int xPos, int yPos, int zPos, Collision& collision){
-        position = glm::vec4(xPos+0.01f, yPos+0.01f, zPos+0.01f, 1.0f);
-        shader = new Shader("./shaders/shader");
-        texture = new Texture("./textures/grass.jpg");
-        for(int x = xPos ; x < xPos + 100 ; x++){
-            for(int y = yPos ; y < yPos + 100 ; y++){
-                for(int z = zPos ; z < zPos + 100 ; z++){
-                    transforms.push_back(Transform(glm::vec3(x,yPos,z)));
-                }
-            }
-        }
-        buffer = new Buffer(cube::vertices, cube::vertTotal, cube::uv, cube::uvTotal, transforms, transforms.size());
-    }
-    void update(Camera& cam);
-private:
-    std::vector<Transform> transforms;
+//    std::vector<glm::vec3> positions;
     std::vector<glm::mat4> activeModels;
     glm::vec4 position;
     //will be placed elsewhere eventually

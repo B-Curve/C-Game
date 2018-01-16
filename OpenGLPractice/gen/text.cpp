@@ -55,6 +55,7 @@ Text::Text(){
 void Text::draw(const std::string& text){
     shader->bind();
     const char * sequence = text.c_str();
+    glDepthFunc(GL_ALWAYS);
     for(unsigned int i = 0 ; i < sizeof(sequence)/sizeof(sequence[0]) ; i++){
         it = letters.find(sequence[i]);
         if(it == letters.end()) continue;
@@ -63,6 +64,7 @@ void Text::draw(const std::string& text){
         glBindVertexArray(vao);
         glDrawArrays(GL_TRIANGLES, 0, 6);
     }
+    glDepthFunc(GL_LESS);
 }
 
 void Text::generateText(){

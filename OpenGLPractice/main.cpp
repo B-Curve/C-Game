@@ -26,22 +26,25 @@
 
 int main() {
     Window window;
-    Camera cam(glm::vec3(30,0,40), window.getWindow());
+    Camera cam(glm::vec3(0,1,0), window.getWindow());
     Collision collision;
     Skybox skybox;
     
-    Chunk100x1x100 chunk(0, -4, 10, collision);
-    Chunk16x16x16 c3(0,-1,20,collision);
-//    Chunk16x16x16 c4(20,2,0);
-//    Chunk16x16x16 c5(-20,2,0);
-//    Chunk16x16x16 c6(0,2,-20);
+    Chunk chunks[] = {
+        Chunk(0,0,0,collision),
+        Chunk(0,32,32,collision),
+        Chunk(32,16,32,collision),
+        Chunk(0,-32,0,collision),
+        Chunk(0,16,32,collision),
+        Chunk(16,16,32,collision),
+    };
     Text text;
     
     double previousTime = glfwGetTime();
     int frameCount = 0;
     int lastFrameCount = 0;
     
-//    glfwSwapInterval(0);//disables v-sync
+    glfwSwapInterval(0);//disables v-sync
     
     glm::vec4 clip;
     while(window.isOpen()){
@@ -54,11 +57,9 @@ int main() {
         }
         window.clear(0.2f, 0.2f, 0.2f, 1.0f);
         cam.update(collision);
-        chunk.update(cam);
-        c3.update(cam);
-//        c4.update(cam);
-//        c5.update(cam);
-//        c6.update(cam);
+        for(int i = 0 ; i < sizeof(chunks)/sizeof(chunks[0]) ; i++){
+            chunks[i].update(cam);
+        }
         skybox.render(cam);
         text.draw("fps " + std::to_string(lastFrameCount));
         window.update();

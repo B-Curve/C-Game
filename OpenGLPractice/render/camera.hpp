@@ -24,7 +24,7 @@ public:
     Camera(const glm::vec3& position, GLFWwindow* window){
         this->position = position;
         this->window = window;
-        projection = glm::perspective(glm::radians(45.0f), (float)800/(float)600, 0.1f, 500.0f);
+        projection = glm::perspective(glm::radians(45.0f), (float)800/(float)600, 0.1f, 80.0f);
         view = glm::lookAt(position, //position
                            position + glm::vec3(0,0,1), //view direction
                            glm::vec3(0,1,0)); //above direction
