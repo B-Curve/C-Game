@@ -15,6 +15,9 @@
 #include "render/texture.hpp"
 #include "render/camera.hpp"
 #include "render/mesh.hpp"
+//#include "generation/block.hpp"
+#include "data/data_fetch.h"
+#include "generation/chunk.hpp"
 
 static double last_time = 0;
 static int ticks = 0;
@@ -22,29 +25,36 @@ static int fps = 0;
 static void framerate();
 
 int main() {
+    std::vector<Light> lights;
+    Data data;
     Window window;
-    glm::vec3 lightPos = glm::vec3(0.0f, 4.0f, 0.0f);
-    glm::vec3 lightPos2 = glm::vec3(16.0f, 4.0f, 16.0f);
-    glm::vec3 lightPos3 = glm::vec3(0.0f, 4.0f, 16.0f);
-    glm::vec3 lightPos4 = glm::vec3(16.0f, 4.0f, 0.0f);
-    std::vector<glm::vec3> lights{
-        lightPos,
-        lightPos2,
-        lightPos3,
-        lightPos4
-    };
     Camera camera(glm::vec3(0,3,5), window.getWindow());
-    Shader * lamp = new Shader(LAMP);
-    Shader * lamp2 = new Shader(LAMP);
-    Shader * lamp3 = new Shader(LAMP);
-    Shader * lamp4 = new Shader(LAMP);
-    Shader * shader = new Shader(LAMP_INHERIT);
-    Texture texture("./textures/bricks.png", false);
-    Texture t2("./textures/bricks_normal.png", false);
-    
-    Mesh mesh("./models/box/box.obj");
     
     CubeMap skybox;
+    
+    std::vector<TEXTURE_TYPE> textures{ DIRT, BRICKS, GRASS };
+    
+    Chunk chunk(glm::vec3(0,0,0), data, FLASHLIGHT, textures);
+    
+    glm::vec3 lampColors[] = {
+        glm::vec3(1.0f, 1.0f, 0.7f),
+        glm::vec3(0.8f, 0.8f, 0.8f),
+        glm::vec3(0.8f, 0.8f, 0.8f),
+        glm::vec3(0.8f, 0.8f, 0.8f),
+        glm::vec3(0.8f, 0.8f, 0.8f),
+    };
+    
+    Light lightGroup[] = {
+        Light(glm::vec3(16,30,16), lampColors[0], SUN),
+        Light(glm::vec3(0,30,32), lampColors[1], COLOSSAL),
+        Light(glm::vec3(32,30,0), lampColors[2], COLOSSAL),
+        Light(glm::vec3(32,30,32), lampColors[3], COLOSSAL),
+        Light(glm::vec3(0,30,0), lampColors[4], COLOSSAL),
+    };
+    
+    for(int i = 0 ; i < sizeof(lightGroup)/sizeof(lightGroup[0]) ; i++){
+        lights.push_back(lightGroup[i]);
+    }
     
 //    glfwSwapInterval(0);
     
@@ -52,38 +62,12 @@ int main() {
         framerate();
         window.clear(0.2f, 0.2f, 0.2f, 1.0f);
         camera.update(window.getWindow());
-        shader->bind();
-        shader->setInt("material.diffuse", 0);
-        shader->setInt("material.bump", 1);
-        shader->updateLitElement(camera, lights);
-        texture.bind(0);
-        t2.bind(1);
-        for(unsigned int x = 0 ; x < 16 ; x++){
-            for(unsigned int z = 0 ; z < 16 ; z++){
-                shader->setPosition(glm::vec3(x*2, 0, z*2));
-                mesh.draw();
-            }
+        
+        chunk.update(camera, lights);
+        
+        for(int i = 0 ; i < lights.size() ; i++){
+            lights[i].draw(camera);
         }
-        
-        lamp->bind();
-        lamp->setLampColor(glm::vec3(1.0f, 1.0f, 0.0f));
-        lamp->updateLight(camera, lightPos);
-        mesh.draw();
-        
-        lamp2->bind();
-        lamp2->setLampColor(glm::vec3(1.0f, 0.0f, 0.0f));
-        lamp2->updateLight(camera, lightPos2);
-        mesh.draw();
-        
-        lamp3->bind();
-        lamp3->setLampColor(glm::vec3(1.0f, 0.0f, 1.0f));
-        lamp3->updateLight(camera, lightPos3);
-        mesh.draw();
-        
-        lamp4->bind();
-        lamp4->setLampColor(glm::vec3(0.0f, 0.0f, 1.0f));
-        lamp4->updateLight(camera, lightPos4);
-        mesh.draw();
         
         skybox.draw(camera);
         window.update();

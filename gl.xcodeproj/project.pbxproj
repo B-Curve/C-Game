@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3C6AA4F02012A00D00ABC4F1 /* mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C6AA4EE2012A00D00ABC4F1 /* mesh.cpp */; };
 		3C6AA4F32012A11D00ABC4F1 /* obj_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C6AA4F12012A11D00ABC4F1 /* obj_loader.cpp */; };
+		3C6AA4F72013F39400ABC4F1 /* chunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C6AA4F52013F39400ABC4F1 /* chunk.cpp */; };
+		3C6AA4FA2013F3FB00ABC4F1 /* block.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C6AA4F82013F3FB00ABC4F1 /* block.cpp */; };
 		3CFDDE5B20115398005DDA0E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CFDDE5A20115398005DDA0E /* main.cpp */; };
 		3CFDDE63201153A3005DDA0E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFDDE62201153A3005DDA0E /* OpenGL.framework */; };
 		3CFDDE6620115403005DDA0E /* window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CFDDE6420115403005DDA0E /* window.cpp */; };
@@ -34,6 +36,11 @@
 		3C6AA4EF2012A00D00ABC4F1 /* mesh.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = mesh.hpp; sourceTree = "<group>"; };
 		3C6AA4F12012A11D00ABC4F1 /* obj_loader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = obj_loader.cpp; sourceTree = "<group>"; };
 		3C6AA4F22012A11D00ABC4F1 /* obj_loader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = obj_loader.hpp; sourceTree = "<group>"; };
+		3C6AA4F52013F39400ABC4F1 /* chunk.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = chunk.cpp; sourceTree = "<group>"; };
+		3C6AA4F62013F39400ABC4F1 /* chunk.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = chunk.hpp; sourceTree = "<group>"; };
+		3C6AA4F82013F3FB00ABC4F1 /* block.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = block.cpp; sourceTree = "<group>"; };
+		3C6AA4F92013F3FB00ABC4F1 /* block.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = block.hpp; sourceTree = "<group>"; };
+		3C73D8AF2014143A00318E81 /* data_fetch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = data_fetch.h; sourceTree = "<group>"; };
 		3CFDDE5720115398005DDA0E /* gl */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = gl; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CFDDE5A20115398005DDA0E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		3CFDDE62201153A3005DDA0E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -60,6 +67,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C6AA4F42013F38300ABC4F1 /* generation */ = {
+			isa = PBXGroup;
+			children = (
+				3C6AA4F52013F39400ABC4F1 /* chunk.cpp */,
+				3C6AA4F62013F39400ABC4F1 /* chunk.hpp */,
+				3C6AA4F82013F3FB00ABC4F1 /* block.cpp */,
+				3C6AA4F92013F3FB00ABC4F1 /* block.hpp */,
+			);
+			path = generation;
+			sourceTree = "<group>";
+		};
+		3C73D8AE2014140D00318E81 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				3C73D8AF2014143A00318E81 /* data_fetch.h */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
 		3CFDDE4E20115398005DDA0E = {
 			isa = PBXGroup;
 			children = (
@@ -80,6 +106,8 @@
 		3CFDDE5920115398005DDA0E /* gl */ = {
 			isa = PBXGroup;
 			children = (
+				3C73D8AE2014140D00318E81 /* data */,
+				3C6AA4F42013F38300ABC4F1 /* generation */,
 				3CFDDE6720115CFC005DDA0E /* render */,
 				3CFDDE5A20115398005DDA0E /* main.cpp */,
 				3CFDDE6420115403005DDA0E /* window.cpp */,
@@ -173,7 +201,9 @@
 			files = (
 				3CFDDE6A20115D07005DDA0E /* shader.cpp in Sources */,
 				3CFDDE6D20116029005DDA0E /* texture.cpp in Sources */,
+				3C6AA4FA2013F3FB00ABC4F1 /* block.cpp in Sources */,
 				3C6AA4F02012A00D00ABC4F1 /* mesh.cpp in Sources */,
+				3C6AA4F72013F39400ABC4F1 /* chunk.cpp in Sources */,
 				3C6AA4F32012A11D00ABC4F1 /* obj_loader.cpp in Sources */,
 				3CFDDE5B20115398005DDA0E /* main.cpp in Sources */,
 				3CFDDE6620115403005DDA0E /* window.cpp in Sources */,

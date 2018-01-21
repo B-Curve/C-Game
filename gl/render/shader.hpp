@@ -17,22 +17,31 @@
 #include <glm/glm.hpp>
 #include "camera.hpp"
 
-enum TYPE {
+enum LIGHT_TYPE {
     FLASHLIGHT,
     LAMP,
     LAMP_INHERIT,
     SKYBOX
 };
 
+enum LIGHT_STRENGTH {
+    DIM,
+    MILD,
+    BRIGHT,
+    SUPER_BRIGHT,
+    COLOSSAL,
+    SUN
+};
+
 class Shader {
 public:
     Shader(const std::string& file);
-    Shader(TYPE type);
+    Shader(LIGHT_TYPE strength);
     void bind();
     void setPosition(const glm::vec3 &position);
     void update(Camera& cam);
     void updateLight(Camera& cam, glm::vec3 lightPos);
-    void updateLitElement(Camera &cam, std::vector<glm::vec3> lightPositions);
+    void updateLitElement(Camera &cam, std::vector<glm::vec3> lampPositions, std::vector<glm::vec3> lampColors, std::vector<LIGHT_STRENGTH> lightStrengths);
     void addLamp();
     void setLampColor(const glm::vec3 &color);
     void setBool(const std::string &name, bool value) const;
@@ -41,11 +50,12 @@ public:
     void setVec3(const std::string &name, const glm::vec3 &value) const;
     void setMat4(const std::string &name, const glm::mat4 &value) const;
 private:
+    void setLightType(LIGHT_STRENGTH type, unsigned int index);
     Shader(const Shader& other){}
     void operator = (const Shader& other){}
     void init(const std::string &file);
     GLuint program;
-    TYPE type;
+    LIGHT_TYPE type;
 };
 
 #endif /* shader_hpp */

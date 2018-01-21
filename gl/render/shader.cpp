@@ -16,7 +16,7 @@ Shader::Shader(const std::string& file){
     init(file);
 }
 
-Shader::Shader(TYPE type){
+Shader::Shader(LIGHT_TYPE type){
     this->type = type;
     if(type == FLASHLIGHT){
         init("./shaders/shader");
@@ -89,23 +89,52 @@ void Shader::updateLight(Camera &cam, glm::vec3 lightPos){
     }
 }
 
-void Shader::updateLitElement(Camera &cam, std::vector<glm::vec3> lightPositions){
+void Shader::updateLitElement(Camera &cam, std::vector<glm::vec3> lampPositions, std::vector<glm::vec3> lampColors, std::vector<LIGHT_STRENGTH> lightStrengths){
     if(type == LAMP_INHERIT){
         this->setMat4("model", cam.getModel());
         this->setMat4("view", cam.getView());
         this->setMat4("projection", cam.getProjection());
         this->setVec3("camPos", cam.getPos());
-        for(int i = 0 ; i < lightPositions.size() ; i++){
-            this->setVec3("lights[" + std::to_string(i) + "].position", lightPositions[i]);
+        for(int i = 0 ; i < lampPositions.size() ; i++){
+            this->setVec3("lights[" + std::to_string(i) + "].position", lampPositions[i]);
             this->setVec3("lights[" + std::to_string(i) + "].ambient", glm::vec3(0.2f, 0.2f, 0.2f));
             this->setVec3("lights[" + std::to_string(i) + "].diffuse", glm::vec3(0.8f, 0.8f, 0.8f));
             this->setVec3("lights[" + std::to_string(i) + "].specular", glm::vec3(1.0f, 1.0f, 1.0f));
-            this->setFloat("lights[" + std::to_string(i) + "].constant", 1.0f);
-            this->setFloat("lights[" + std::to_string(i) + "].linear", 0.09f);
-            this->setFloat("lights[" + std::to_string(i) + "].quadratic", 0.032f);
+            this->setVec3("lights[" + std::to_string(i) + "].color", lampColors[i]);
+            this->setLightType(lightStrengths[i], i);
         }
         this->setFloat("material.shininess", 32.0f);
     }
+}
+
+void Shader::setLightType(LIGHT_STRENGTH type, unsigned int index){
+    float constant = 1.0f, linear = 0.7f, quadratic = 1.8f;
+    switch (type) {
+        case DIM:
+            linear = 0.7f; quadratic = 1.8f;
+            break;
+        case MILD:
+            linear = 0.22f; quadratic = 0.20f;
+            break;
+        case BRIGHT:
+            linear = 0.07f; quadratic = 0.017f;
+            break;
+        case SUPER_BRIGHT:
+            linear = 0.022f; quadratic = 0.0019f;
+            break;
+        case COLOSSAL:
+            linear = 0.007f; quadratic = 0.0002f;
+            break;
+        case SUN:
+            linear = 0.0014f; quadratic = 0.000007f;
+            break;
+        default:
+            linear = 0.7f; quadratic = 1.8f; //shouldn't default, but just in case!
+            break;
+    }
+    this->setFloat("lights[" + std::to_string(index) + "].constant", constant);
+    this->setFloat("lights[" + std::to_string(index) + "].linear", linear);
+    this->setFloat("lights[" + std::to_string(index) + "].quadratic", quadratic);
 }
 
 void Shader::setLampColor(const glm::vec3 &color){
