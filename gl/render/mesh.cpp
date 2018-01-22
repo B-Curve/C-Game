@@ -7,6 +7,7 @@
 //
 
 #include "mesh.hpp"
+#include <iostream>
 
 Mesh::Mesh(const std::string &file){
     model = OBJModel(file).ToIndexedModel();

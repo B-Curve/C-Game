@@ -30,24 +30,27 @@ enum BLOCK_TYPE {
 };
 
 enum TEXTURE_TYPE {
-    BRICKS = 0,
-    DIRT = 1,
-    COBBLESTONE = 2,
-    GRASS = 3
+    BRICK_TEXTURE = 0,
+    DIRT_TEXTURE = 1,
+    COBBLESTONE_TEXTURE = 2,
+    GRASS_TEXTURE = 3,
+    STONE_TEXTURE = 4
 };
 
 static std::string diffuseMap[] = {
     "./textures/bricks.png",
     "./textures/dirt.png",
     "./textures/cobblestone.png",
-    "./textures/grass.png"
+    "./textures/grass.png",
+    "./textures/stone.png"
 };
 
 static std::string bumpMap[] = {
     "./textures/bricks_normal.png",
     "./textures/dirt_bump.png",
     "./textures/cobblestone_bump.png",
-    "./textures/grass_bump.png"
+    "./textures/grass_bump.png",
+    "./textures/stone_bump.png"
 };
 
 class Light {
@@ -72,6 +75,7 @@ class Block {
 public:
     Block(BLOCK_TYPE block, Data &data, LIGHT_TYPE type, TEXTURE_TYPE textureType){
         this->lightType = type;
+        this->textureType = textureType;
         if(block == STONE){
             data.mesh_iterator = data.meshes.find(BOX);
             data.shader_iterator = data.shaders.find(type);
@@ -103,14 +107,20 @@ public:
             }
         }
     }
-    void draw(Camera &camera, const glm::vec3 &position, std::vector<Light> lights);
-    void draw(Camera &camera, const glm::vec3 &position);
+    void draw(Camera &camera, const glm::vec3 &position, std::vector<Light> lights, bool isFirst);
+    void draw(Camera &camera, const glm::vec3 &position, bool isFirst);
+    TEXTURE_TYPE textureType;
     LIGHT_TYPE lightType;
 private:
     Texture * primary;
     Texture * bump;
     Shader * shader;
     Mesh * mesh;
+};
+
+struct BlockInstance {
+    Block * block;
+    glm::vec3 position;
 };
 
 #endif /* block_hpp */

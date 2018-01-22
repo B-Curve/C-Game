@@ -32,7 +32,7 @@ int main() {
     
     CubeMap skybox;
     
-    std::vector<TEXTURE_TYPE> textures{ DIRT, BRICKS, GRASS };
+    std::vector<TEXTURE_TYPE> textures{ DIRT_TEXTURE, STONE_TEXTURE, GRASS_TEXTURE };
     
     Chunk chunk(glm::vec3(0,0,0), data, FLASHLIGHT, textures);
     

@@ -8,7 +8,7 @@
 
 #include "block.hpp"
 
-void Block::draw(Camera &camera, const glm::vec3 &position, std::vector<Light> lights){
+void Block::draw(Camera &camera, const glm::vec3 &position, std::vector<Light> lights, bool isFirst){
     shader->bind();
     shader->setInt("material.diffuse", 0);
     shader->setInt("material.bump", 1);
@@ -21,19 +21,23 @@ void Block::draw(Camera &camera, const glm::vec3 &position, std::vector<Light> l
         lightStrengths.push_back(lights[i].lightStrength);
     }
     shader->updateLitElement(camera, lightPositions, lightColors, lightStrengths);
-    primary->bind(0);
-    bump->bind(1);
+    if(isFirst){
+        primary->bind(0);
+        bump->bind(1);
+    }
     shader->setPosition(position);
     mesh->draw();
 }
 
-void Block::draw(Camera &camera, const glm::vec3 &position){
-    shader->bind();
-    shader->setInt("material.diffuse", 0);
-    shader->setInt("material.bump", 1);
-    shader->update(camera);
-    primary->bind(0);
-    bump->bind(1);
+void Block::draw(Camera &camera, const glm::vec3 &position, bool isFirst){
+    if(isFirst){
+        shader->bind();
+        shader->update(camera);
+        shader->setInt("material.diffuse", 0);
+        shader->setInt("material.bump", 1);
+        primary->bind(0);
+        bump->bind(1);
+    }
     shader->setPosition(position);
     mesh->draw();
 }
