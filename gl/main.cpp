@@ -15,9 +15,9 @@
 #include "render/texture.hpp"
 #include "render/camera.hpp"
 #include "render/mesh.hpp"
-//#include "generation/block.hpp"
 #include "data/data_fetch.h"
 #include "generation/chunk.hpp"
+#include "render/text.hpp"
 
 static double last_time = 0;
 static int ticks = 0;
@@ -29,6 +29,7 @@ int main() {
     Data data;
     Window window;
     Camera camera(glm::vec3(0,3,5), window.getWindow());
+    Text text;
     
     CubeMap skybox;
     
@@ -70,6 +71,9 @@ int main() {
         }
         
         skybox.draw(camera);
+        
+        text.draw("Hello", 20, 20, 1, glm::vec3(0.0,1.0,0.0));
+        
         window.update();
     }
     

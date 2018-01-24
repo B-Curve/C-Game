@@ -30,6 +30,9 @@ Shader::Shader(LIGHT_TYPE type){
     if(type == LAMP_INHERIT){
         init("./shaders/lamp_inherit");
     }
+    if(type == TEXT){
+        init("./shaders/text");
+    }
 }
 
 void Shader::init(const std::string &file){

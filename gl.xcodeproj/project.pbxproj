@@ -11,6 +11,7 @@
 		3C6AA4F32012A11D00ABC4F1 /* obj_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C6AA4F12012A11D00ABC4F1 /* obj_loader.cpp */; };
 		3C6AA4F72013F39400ABC4F1 /* chunk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C6AA4F52013F39400ABC4F1 /* chunk.cpp */; };
 		3C6AA4FA2013F3FB00ABC4F1 /* block.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C6AA4F82013F3FB00ABC4F1 /* block.cpp */; };
+		3CD8DA6A2018EFB500BF730E /* text.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CD8DA682018EFB500BF730E /* text.cpp */; };
 		3CFDDE5B20115398005DDA0E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CFDDE5A20115398005DDA0E /* main.cpp */; };
 		3CFDDE63201153A3005DDA0E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFDDE62201153A3005DDA0E /* OpenGL.framework */; };
 		3CFDDE6620115403005DDA0E /* window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CFDDE6420115403005DDA0E /* window.cpp */; };
@@ -41,6 +42,8 @@
 		3C6AA4F82013F3FB00ABC4F1 /* block.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = block.cpp; sourceTree = "<group>"; };
 		3C6AA4F92013F3FB00ABC4F1 /* block.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = block.hpp; sourceTree = "<group>"; };
 		3C73D8AF2014143A00318E81 /* data_fetch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = data_fetch.h; sourceTree = "<group>"; };
+		3CD8DA682018EFB500BF730E /* text.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = text.cpp; sourceTree = "<group>"; };
+		3CD8DA692018EFB500BF730E /* text.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = text.hpp; sourceTree = "<group>"; };
 		3CFDDE5720115398005DDA0E /* gl */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = gl; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CFDDE5A20115398005DDA0E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		3CFDDE62201153A3005DDA0E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -138,6 +141,8 @@
 				3C6AA4EF2012A00D00ABC4F1 /* mesh.hpp */,
 				3C6AA4F12012A11D00ABC4F1 /* obj_loader.cpp */,
 				3C6AA4F22012A11D00ABC4F1 /* obj_loader.hpp */,
+				3CD8DA682018EFB500BF730E /* text.cpp */,
+				3CD8DA692018EFB500BF730E /* text.hpp */,
 			);
 			path = render;
 			sourceTree = "<group>";
@@ -207,6 +212,7 @@
 				3C6AA4F32012A11D00ABC4F1 /* obj_loader.cpp in Sources */,
 				3CFDDE5B20115398005DDA0E /* main.cpp in Sources */,
 				3CFDDE6620115403005DDA0E /* window.cpp in Sources */,
+				3CD8DA6A2018EFB500BF730E /* text.cpp in Sources */,
 				3CFDDE7120116DD1005DDA0E /* camera.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -324,8 +330,12 @@
 				HEADER_SEARCH_PATHS = (
 					/usr/local/Cellar/glm/0.9.8.5/include/,
 					/usr/local/include/,
+					/usr/local/opt/freetype/include/freetype2/,
 				);
-				LIBRARY_SEARCH_PATHS = /usr/local/lib/;
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib/,
+					/usr/local/opt/freetype/lib/,
+				);
 				OTHER_LDFLAGS = (
 					"-lGLFW",
 					"-lfreetype",
@@ -341,8 +351,12 @@
 				HEADER_SEARCH_PATHS = (
 					/usr/local/Cellar/glm/0.9.8.5/include/,
 					/usr/local/include/,
+					/usr/local/opt/freetype/include/freetype2/,
 				);
-				LIBRARY_SEARCH_PATHS = /usr/local/lib/;
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib/,
+					/usr/local/opt/freetype/lib/,
+				);
 				OTHER_LDFLAGS = (
 					"-lGLFW",
 					"-lfreetype",

@@ -21,7 +21,8 @@ enum LIGHT_TYPE {
     FLASHLIGHT,
     LAMP,
     LAMP_INHERIT,
-    SKYBOX
+    SKYBOX,
+    TEXT
 };
 
 enum LIGHT_STRENGTH {
