@@ -11,6 +11,7 @@
 int main() {
     
     Game game;
+    game.start();
     
     return 117;
     

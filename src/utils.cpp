@@ -20,6 +20,15 @@ GLuint gen_buffer(GLsizei size, GLfloat *data){
     glGenBuffers(1, &buffer);
     glBindBuffer(GL_ARRAY_BUFFER, buffer);
     glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
+//    delete [] data;
+    return buffer;
+}
+
+GLuint gen_buffer(GLsizei size, std::vector<glm::vec3> data){
+    GLuint buffer;
+    glGenBuffers(1, &buffer);
+    glBindBuffer(GL_ARRAY_BUFFER, buffer);
+    glBufferData(GL_ARRAY_BUFFER, size, &data[0], GL_STATIC_DRAW);
     return buffer;
 }
 

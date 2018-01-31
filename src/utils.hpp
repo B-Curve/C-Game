@@ -14,6 +14,8 @@
 #endif
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <vector>
+#include <glm/glm.hpp>
 
 struct FPS {
     unsigned int fps;
@@ -25,6 +27,7 @@ struct FPS {
 
 GLuint gen_vao();
 GLuint gen_buffer(GLsizei size, GLfloat *data);
+GLuint gen_buffer(GLsizei size, std::vector<glm::vec3> data);
 GLuint gen_dynamic_buffer(GLsizei size);
 unsigned int update_fps(FPS *fps);
 
